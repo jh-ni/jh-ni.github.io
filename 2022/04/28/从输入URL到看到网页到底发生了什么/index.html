@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="Nini&#39;s Blog">
 <meta property="og:description" content="​		第一次把东西写成blog的形式，想作为一个比较稚嫩的写手来谈谈自己的看法，也是把一些知识进行整理和内化。如果有幸在茫茫网络洪流中被您阅读到，那么十分期待您的指教。​		另外，创作不易，转载请标明出处。 从输入URL到页面加载输入URL后URL是什么？通俗的讲，就是指我们常能看到的网址链接，往往出现在浏览器的最上方，以http或https开头。 那么按照定义来说，URL &#x3D; Unif">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:/Users/57196/AppData/Roaming/Typora/typora-user-images/image-20220428163103432.png">
-<meta property="og:image" content="c:/Users/57196/AppData/Roaming/Typora/typora-user-images/image-20220428163809220.png">
+<meta property="og:image" content="https://jh-ni.github.io/images/image-1-1.png">
+<meta property="og:image" content="https://jh-ni.github.io/images/image-1-2.png">
 <meta property="article:published_time" content="2022-04-28T05:00:12.000Z">
-<meta property="article:modified_time" content="2022-04-28T08:44:59.339Z">
+<meta property="article:modified_time" content="2022-04-29T15:06:01.400Z">
 <meta property="article:author" content="Jh-Ni">
 <meta property="article:tag" content="study">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/57196/AppData/Roaming/Typora/typora-user-images/image-20220428163103432.png">
+<meta name="twitter:image" content="https://jh-ni.github.io/images/image-1-1.png">
 
 
 <link rel="canonical" href="https://jh-ni.github.io/2022/04/28/%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E7%9C%8B%E5%88%B0%E7%BD%91%E9%A1%B5%E5%88%B0%E5%BA%95%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/">
@@ -212,9 +212,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-04-28 13:00:12 / 修改时间：16:44:59" itemprop="dateCreated datePublished" datetime="2022-04-28T13:00:12+08:00">2022-04-28</time>
+      <time title="创建时间：2022-04-28 13:00:12" itemprop="dateCreated datePublished" datetime="2022-04-28T13:00:12+08:00">2022-04-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-29 23:06:01" itemprop="dateModified" datetime="2022-04-29T23:06:01+08:00">2022-04-29</time>
     </span>
 
   
@@ -233,10 +239,10 @@
 <h3 id="URL解析"><a href="#URL解析" class="headerlink" title="URL解析"></a>URL解析</h3><p>首先查找<strong>缓存</strong>，也就是看你的客户端内有没有缓存的该页面，如果命中缓存，那么浏览器直接从客户端中读取资源，不发送请求到服务器。（关于怎么样判断命中缓存和其中的逻辑见这篇文章（ps埋个坑 暂时还没写））</p>
 <h4 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h4><p>如果没有命中缓存，那么就要进行<strong>DNS域名解析</strong>，也就是将我们输入的URL网址转换为一个IP地址，为后面发起http请求做准备。</p>
 <h5 id="什么是DNS？"><a href="#什么是DNS？" class="headerlink" title="什么是DNS？"></a>什么是DNS？</h5><p>​		Domain Name System , 也就是域名系统。在《计算机网络：自顶向下》中提到，DNS是指一个由分层的DNS服务器实现的<u>分布式数据库</u>，是一个使得主机能够查询分布式数据库的<u>应用层协议</u>。<br>​		DNS服务器分为根域名服务器，顶级域名服务器和权威域名服务器。</p>
-<h5 id="递归查询"><a href="#递归查询" class="headerlink" title="递归查询"></a>递归查询</h5><p>​	从DNS高速缓存中进行查询，客户端向本地的DNS服务器发送DNS服务报文的过程。<br><img src="C:\Users\57196\AppData\Roaming\Typora\typora-user-images\image-20220428163103432.png" alt="image-20220428163103432" style="zoom:67%;" /></p>
+<h5 id="递归查询"><a href="#递归查询" class="headerlink" title="递归查询"></a>递归查询</h5><p>​	从DNS高速缓存中进行查询，客户端向本地的DNS服务器发送DNS服务报文的过程。</p>
+<p><img src="/images/image-1-1.png" alt="image-1-1"></p>
 <h5 id="迭代查询"><a href="#迭代查询" class="headerlink" title="迭代查询"></a>迭代查询</h5><p>​	在本地找不到缓存的情况下，就一级一级询问其他域名服务器，从根域名服务器开始。</p>
-<img src="C:\Users\57196\AppData\Roaming\Typora\typora-user-images\image-20220428163809220.png" alt="image-20220428163809220" style="zoom: 67%;" />
-
+<p><img src="/images/image-1-2.png" alt="image-1-2"></p>
 <p>​	直到询问到答案就返回，这里是迭代查询。</p>
 <h3 id="建立TCP连接"><a href="#建立TCP连接" class="headerlink" title="建立TCP连接"></a>建立TCP连接</h3>
     </div>
