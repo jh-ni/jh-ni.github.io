@@ -20,19 +20,20 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jh-ni.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="​		第一次把东西写成blog的形式，想作为一个比较稚嫩的写手来谈谈自己的看法，也是把一些知识进行整理和内化。如果有幸在茫茫网络洪流中被您阅读到，那么十分期待您的指教。​		另外，创作不易，转载请标明出处。 从输入URL到页面加载">
+    <meta name="description" content="​		第一次把东西写成blog的形式，想作为一个比较稚嫩的写手来谈谈自己的看法，也是把一些知识进行整理和内化。如果有幸在茫茫网络洪流中被您阅读到，那么十分期待您的指教。​		另外，创作不易，转载请标明出处。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="谈谈从输入URL到页面加载的过程">
 <meta property="og:url" content="https://jh-ni.github.io/2022/04/28/%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E7%9C%8B%E5%88%B0%E7%BD%91%E9%A1%B5%E5%88%B0%E5%BA%95%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/index.html">
 <meta property="og:site_name" content="Nini&#39;s Blog">
-<meta property="og:description" content="​		第一次把东西写成blog的形式，想作为一个比较稚嫩的写手来谈谈自己的看法，也是把一些知识进行整理和内化。如果有幸在茫茫网络洪流中被您阅读到，那么十分期待您的指教。​		另外，创作不易，转载请标明出处。 从输入URL到页面加载">
+<meta property="og:description" content="​		第一次把东西写成blog的形式，想作为一个比较稚嫩的写手来谈谈自己的看法，也是把一些知识进行整理和内化。如果有幸在茫茫网络洪流中被您阅读到，那么十分期待您的指教。​		另外，创作不易，转载请标明出处。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://jh-ni.github.io/images/image-1-1.png">
 <meta property="og:image" content="https://jh-ni.github.io/images/image-1-2.png">
 <meta property="og:image" content="https://jh-ni.github.io/images/image-1-3.png">
-<meta property="og:image" content="e:/hexo-blog/source/images/image-1-3.png">
+<meta property="og:image" content="https://jh-ni.github.io/images/image-1-4.png">
+<meta property="og:image" content="https://jh-ni.github.io/images/image-1-5.png">
 <meta property="article:published_time" content="2022-04-28T05:00:12.000Z">
-<meta property="article:modified_time" content="2022-05-04T12:37:41.744Z">
+<meta property="article:modified_time" content="2022-05-06T08:53:11.718Z">
 <meta property="article:author" content="Jh-Ni">
 <meta property="article:tag" content="study">
 <meta name="twitter:card" content="summary">
@@ -122,7 +123,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">从输入URL到页面加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5URL%E5%90%8E"><span class="nav-number">1.1.</span> <span class="nav-text">输入URL后</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URL%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.1.</span> <span class="nav-text">URL是什么？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL%E8%A7%A3%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">URL解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS%E8%A7%A3%E6%9E%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">DNS解析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFDNS%EF%BC%9F"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">什么是DNS？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">递归查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">迭代查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8BTCP%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.3.</span> <span class="nav-text">建立TCP连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">第一次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">第二次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="nav-number">1.3.3.</span> <span class="nav-text">第三次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF3%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%9F"><span class="nav-number">1.3.4.</span> <span class="nav-text">为什么是3次握手？</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5URL%E5%90%8E"><span class="nav-number">1.</span> <span class="nav-text">输入URL后</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">URL是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">URL解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS%E8%A7%A3%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">DNS解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFDNS%EF%BC%9F"><span class="nav-number">2.1.1.</span> <span class="nav-text">什么是DNS？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.1.2.</span> <span class="nav-text">递归查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.1.3.</span> <span class="nav-text">迭代查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8BTCP%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.</span> <span class="nav-text">建立TCP连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="nav-number">3.1.</span> <span class="nav-text">第一次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="nav-number">3.2.</span> <span class="nav-text">第二次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="nav-number">3.3.</span> <span class="nav-text">第三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF3%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%9F"><span class="nav-number">3.4.</span> <span class="nav-text">为什么是3次握手？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E8%B5%B7http%E8%AF%B7%E6%B1%82"><span class="nav-number">4.</span> <span class="nav-text">发起http请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">请求方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E5%92%8CTCP"><span class="nav-number">4.2.</span> <span class="nav-text">HTTP和TCP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%93%8D%E5%BA%94"><span class="nav-number">5.</span> <span class="nav-text">服务器响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%ADTCP%E8%BF%9E%E6%8E%A5"><span class="nav-number">6.</span> <span class="nav-text">关闭TCP连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">6.1.</span> <span class="nav-text">第一次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">6.2.</span> <span class="nav-text">第二次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">6.3.</span> <span class="nav-text">第三次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">6.4.</span> <span class="nav-text">第四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%AD%89%E5%BE%852MSL%E6%97%B6%E9%95%BF%EF%BC%9F"><span class="nav-number">6.4.1.</span> <span class="nav-text">客户端为什么要等待2MSL时长？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF4%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%9F"><span class="nav-number">6.5.</span> <span class="nav-text">为什么是4次挥手？</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -222,7 +223,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-05-04 20:37:41" itemprop="dateModified" datetime="2022-05-04T20:37:41+08:00">2022-05-04</time>
+      <time title="Modified: 2022-05-06 16:53:11" itemprop="dateModified" datetime="2022-05-06T16:53:11+08:00">2022-05-06</time>
     </span>
 
   
@@ -236,34 +237,60 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>​		第一次把东西写成blog的形式，想作为一个比较稚嫩的写手来谈谈自己的看法，也是把一些知识进行整理和内化。如果有幸在茫茫网络洪流中被您阅读到，那么十分期待您的指教。<br>​		另外，创作不易，转载请标明出处。</p>
-<h2 id="从输入URL到页面加载"><a href="#从输入URL到页面加载" class="headerlink" title="从输入URL到页面加载"></a>从输入URL到页面加载</h2><span id="more"></span>
+<span id="more"></span>
 
-<h3 id="输入URL后"><a href="#输入URL后" class="headerlink" title="输入URL后"></a><center>输入URL后</center></h3><h4 id="URL是什么？"><a href="#URL是什么？" class="headerlink" title="URL是什么？"></a>URL是什么？</h4><p>通俗的讲，就是指我们常能看到的网址链接，往往出现在浏览器的最上方，以http或https开头。</p>
+<h2 id="输入URL后"><a href="#输入URL后" class="headerlink" title="输入URL后"></a><center>输入URL后</center></h2><h3 id="URL是什么？"><a href="#URL是什么？" class="headerlink" title="URL是什么？"></a>URL是什么？</h3><p>通俗的讲，就是指我们常能看到的网址链接，往往出现在浏览器的最上方，以http或https开头。</p>
 <p>那么按照定义来说，URL &#x3D; Uniform Resource Locator , 学名“统一资源定位符”，一般来说包括协议、服务器名、端口号、路径 、资源文件名等。</p>
-<h3 id="URL解析"><a href="#URL解析" class="headerlink" title="URL解析"></a><center>URL解析</center></h3><p>首先查找<strong>缓存</strong>，也就是看你的客户端内有没有缓存的该页面，如果命中缓存，那么浏览器直接从客户端中读取资源，不发送请求到服务器。（关于怎么样判断命中缓存和其中的逻辑见这篇文章<em>（ps: 埋个坑 暂时还没写）</em>）</p>
-<h4 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h4><p>如果没有命中缓存，那么就要进行<strong>DNS域名解析</strong>，也就是将我们输入的URL网址转换为一个IP地址，为后面发起http请求做准备。</p>
-<h5 id="什么是DNS？"><a href="#什么是DNS？" class="headerlink" title="什么是DNS？"></a>什么是DNS？</h5><p>​		Domain Name System , 也就是域名系统。在《计算机网络：自顶向下》中提到，DNS是指一个由分层的DNS服务器实现的<u>分布式数据库</u>，是一个使得主机能够查询分布式数据库的<u>应用层协议</u>。<br>​		DNS服务器分为根域名服务器，顶级域名服务器和权威域名服务器。</p>
-<h5 id="递归查询"><a href="#递归查询" class="headerlink" title="递归查询"></a>递归查询</h5><p>​	从DNS高速缓存中进行查询，客户端向本地的DNS服务器发送DNS服务报文的过程。</p>
+<h2 id="URL解析"><a href="#URL解析" class="headerlink" title="URL解析"></a><center>URL解析</center></h2><p>首先查找<strong>缓存</strong>，也就是看你的客户端内有没有缓存的该页面，如果命中缓存，那么浏览器直接从客户端中读取资源，不发送请求到服务器。（关于怎么样判断命中缓存和其中的逻辑见这篇文章<em>（ps: 埋个坑 暂时还没写）</em>）</p>
+<h3 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h3><p>如果没有命中缓存，那么就要进行<strong>DNS域名解析</strong>，也就是将我们输入的URL网址转换为一个IP地址，为后面发起http请求做准备。</p>
+<h4 id="什么是DNS？"><a href="#什么是DNS？" class="headerlink" title="什么是DNS？"></a>什么是DNS？</h4><p>​		Domain Name System , 也就是域名系统。在《计算机网络：自顶向下》中提到，DNS是指一个由分层的DNS服务器实现的<u>分布式数据库</u>，是一个使得主机能够查询分布式数据库的<u>应用层协议</u>。<br>​		DNS服务器分为根域名服务器，顶级域名服务器和权威域名服务器。</p>
+<h4 id="递归查询"><a href="#递归查询" class="headerlink" title="递归查询"></a>递归查询</h4><p>​	从DNS高速缓存中进行查询，客户端向本地的DNS服务器发送DNS服务报文的过程。</p>
 <p><img src="/images/image-1-1.png" alt="image-1-1"></p>
-<h5 id="迭代查询"><a href="#迭代查询" class="headerlink" title="迭代查询"></a>迭代查询</h5><p>​	在本地找不到缓存的情况下，就一级一级询问其他域名服务器，从根域名服务器开始。</p>
+<h4 id="迭代查询"><a href="#迭代查询" class="headerlink" title="迭代查询"></a>迭代查询</h4><p>​	在本地找不到缓存的情况下，就一级一级询问其他域名服务器，从根域名服务器开始。</p>
 <p><img src="/images/image-1-2.png" alt="image-1-2"></p>
 <p>​	直到询问到答案就返回，这里是迭代查询。</p>
-<h3 id="建立TCP连接"><a href="#建立TCP连接" class="headerlink" title="建立TCP连接"></a><center>建立TCP连接</center></h3><p>在解析出IP地址后，和服务器建立TCP连接。TCP连接即 transmission control protocol 传输控制协议，讲到TCP连接不得不说的就是“三次握手”。</p>
+<h2 id="建立TCP连接"><a href="#建立TCP连接" class="headerlink" title="建立TCP连接"></a><center>建立TCP连接</center></h2><p>在解析出IP地址后，和服务器建立TCP连接。TCP连接即 transmission control protocol 传输控制协议，讲到TCP连接不得不说的就是“三次握手”。</p>
 <p><b>TCP首部常用标志比特位</b><br>ACK（确认括号有效），SYN（同步序列编号），FIN（发起端完成发送任务）<br>另外，seq常标识从TCP发端向TCP收端发送的数据字节流，图中我用ACK和ack区分首部和其确认号的值。</p>
-<div align="center">
-
 <p><img src="/images/image-1-3.png" alt="image-1-3"></p>
-<img src="E:\hexo-blog\source\images\image-1-3.png" width=60%>
-
-</div>
-
-<h4 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h4><p><strong>客户端</strong>发送SYN包到服务器，进入<em><strong>SYN-SENT</strong></em>状态。<br>标志位SYN&#x3D;1、随机序列号j。</p>
-<h4 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h4><p><strong>服务端</strong>接收到客户端的SYN包后，发送确认数据包给客户端，进入<em><strong>SYN-RCVD</strong></em>状态。<br>标志位ACK&#x3D;1、确认序列号j+1，SYN&#x3D;1、随机序列号k。</p>
-<h4 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h4><p><strong>客户端</strong>收到服务端的数据包之后，验证ACK、SYN都为1，发送确认数据包，进入<em><strong>ESTABLISHED</strong></em>状态。<br>标志位ACK&#x3D;1、确认序列号k+1。</p>
+<h3 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h3><p><strong>客户端</strong>发送SYN包到服务器，进入<em><strong>SYN-SENT</strong></em>状态。<br>标志位SYN&#x3D;1、随机序列号j。</p>
+<h3 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h3><p><strong>服务端</strong>接收到客户端的SYN包后，发送确认数据包给客户端，进入<em><strong>SYN-RCVD</strong></em>状态。<br>标志位ACK&#x3D;1、确认序列号j+1，SYN&#x3D;1、随机序列号k。</p>
+<h3 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h3><p><strong>客户端</strong>收到服务端的数据包之后，验证ACK、SYN都为1，发送确认数据包，进入<em><strong>ESTABLISHED</strong></em>状态。<br>标志位ACK&#x3D;1、确认序列号k+1。</p>
 <p><strong>服务端</strong>收到客户端数据，验证ACK之后，也进入<em><strong>ESTABLISHED</strong></em>状态。</p>
 <p>两者都进入establish状态后，TCP连接成功建立。</p>
-<h4 id="为什么是3次握手？"><a href="#为什么是3次握手？" class="headerlink" title="为什么是3次握手？"></a>为什么是3次握手？</h4><p>在客户端和服务端都分别收到正确的ACK后连接建立，未收到则启用超时重传机制（设置重传次数避免无限重传），这样可以避免因网络超时导致的丢包情况。<br>TCP具备可靠传输的特点，需要确认双方的发送和接收能力。第一次确认客户端的发送，第二次确认服务端的接收和发送，第三次确认客户端的接收能力，减少出现丢包现象的可能。</p>
-
+<h3 id="为什么是3次握手？"><a href="#为什么是3次握手？" class="headerlink" title="为什么是3次握手？"></a>为什么是3次握手？</h3><p>为了确保双方能够稳定地建立连接并完成数据报文的请求与响应。</p>
+<p>在客户端和服务端都分别收到正确的ACK后连接建立，未收到则启用超时重传机制（设置重传次数避免无限重传），这样可以避免因网络超时导致的丢包情况。<br>TCP具备可靠传输的特点，需要确认双方的发送和接收能力。第一次确认客户端的发送，第二次确认服务端的接收和发送，第三次确认客户端的接收能力，减少出现丢包现象的可能。</p>
+<h2 id="发起http请求"><a href="#发起http请求" class="headerlink" title="发起http请求"></a><center>发起http请求</center></h2><p>浏览器发起读取文件的HTTP请求，该请求报文作为TCP三次握手的第三次数据发送给服务器</p>
+<p>http报文格式</p>
+<ul>
+<li>起始行（start line）：描述请求或相应基本信息（<em>请求方法 URL 版本号</em>）</li>
+<li>头部字段（header）：使用key-value形式更详细地说明报文</li>
+<li>消息正文（entity）：实际传输的数据，可以是超文本</li>
+</ul>
+<h3 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h3><ul>
+<li><strong>GET</strong> 获取资源，指定的资源经服务器端解析后返回响应内容。</li>
+<li><strong>POST</strong>  传输实体信息</li>
+<li>PUT  传输文件，请求报文的主体中要包含文件内容</li>
+<li>HEAD  获得响应首部，不返回报文主体部分</li>
+<li>DELETE  删除文件，按照请求URI删除指定的资源</li>
+<li>OPTIONS  询问支持的方法</li>
+<li>TRACE  追踪路径，让Web服务器端将之前的请求通信环回给客户端的方法</li>
+<li>CONNECT  要求用隧道协议连接代理，使用SSL和TLS协议把通信内容加密后经网络隧道传输</li>
+</ul>
+<h3 id="HTTP和TCP"><a href="#HTTP和TCP" class="headerlink" title="HTTP和TCP"></a>HTTP和TCP</h3><p>浏览器使用HTTP作为应用层协议，用来封装请求的文本信息<br>使用TCP&#x2F;IP作为传输层协议将它发送到网络上<br>浏览器先通过TCP与服务器建立连接，而HTTP的内容是通过TCP的传输数据阶段来实现的。</p>
+<p><img src="/images/image-1-4.png" alt="image-1-4"></p>
+<h2 id="服务器响应"><a href="#服务器响应" class="headerlink" title="服务器响应"></a><center>服务器响应</center></h2><p>浏览器向服务器发送请求行、请求头后，服务器会根据浏览器的请求信息准备对应内容。</p>
+<p>服务器先返回相应行，再返回响应头和响应体。</p>
+<h2 id="关闭TCP连接"><a href="#关闭TCP连接" class="headerlink" title="关闭TCP连接"></a><center>关闭TCP连接</center></h2><p>在服务器返回数据之后，就可以断开TCP连接了。<br>有时浏览器或服务器加入了 Connextion:Keep-Alive 后，会仍保持TCP连接状态，可以省去下次请求时需要建立连接的时间，提升资源加载速度。</p>
+<p>TCP连接是全双工通信，服务器和客户端都可以主动断开连接。此处假设客户端主动发起断开连接的请求。</p>
+<p><img src="/images/image-1-5.png" alt="image-1-5"></p>
+<h3 id="第一次挥手"><a href="#第一次挥手" class="headerlink" title="第一次挥手"></a>第一次挥手</h3><p>客户端发送特殊报文，FIN&#x3D;1，进入<em><strong>FIN-WAIT-1</strong></em>状态。<br>客户端此时不再发送数据报，等待服务端的响应报文。<br>标志位FIN&#x3D;1，分组序号seq&#x3D;u。</p>
+<h3 id="第二次挥手"><a href="#第二次挥手" class="headerlink" title="第二次挥手"></a>第二次挥手</h3><p>服务端收到FIN报文后，发送响应ACK报文，进入<em><strong>CLOSE-WAIT</strong></em>状态。告知客户端请求已收到，正在处理。（该状态持续时间短）<br>标志位ACK&#x3D;1，确认序列号ack&#x3D;u+1。</p>
+<h3 id="第三次挥手"><a href="#第三次挥手" class="headerlink" title="第三次挥手"></a>第三次挥手</h3><p>服务端发送FIN报文，进入<em><strong>LAST-ACK</strong></em>状态，告知客户端可以关闭连接了，等待客户端响应报文。<br>标志位FIN&#x3D;1、分组序号seq&#x3D;w，ACK&#x3D;1、确认序列号ack&#x3D;u+1。</p>
+<h3 id="第四次挥手"><a href="#第四次挥手" class="headerlink" title="第四次挥手"></a>第四次挥手</h3><p>客户端返回ACK报文表示已收到刚刚服务端的FIN报文，告知服务端可以关闭连接。进入<em><strong>TIME-WAIT</strong></em>状态。<br>标志位ACK&#x3D;1、ack&#x3D;w+1。</p>
+<p>服务端收到客服端的ACK响应报文后，释放用于该TCP连接的所有资源，进入<em><strong>CLOSED</strong></em>状态。</p>
+<p>客户端会等待2MSL时长后释放用于该连接的资源，进入<em><strong>CLOSED</strong></em>状态。</p>
+<h4 id="客户端为什么要等待2MSL时长？"><a href="#客户端为什么要等待2MSL时长？" class="headerlink" title="客户端为什么要等待2MSL时长？"></a>客户端为什么要等待2MSL时长？</h4><p>MSL为最长报文段寿命，超时2MSL的报文会被丢弃，如果客户端最后的报文丢失，服务端会发起超时请求，重新发送前三次挥手。通过等待一个最长周期，如果这个周期内没有收到服务端的报文请求，那么可以确认报文已经达到了服务端。</p>
+<h3 id="为什么是4次挥手？"><a href="#为什么是4次挥手？" class="headerlink" title="为什么是4次挥手？"></a>为什么是4次挥手？</h3>
     </div>
 
     
