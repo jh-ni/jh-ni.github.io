@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jh-ni.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="146.LRU缓存  请你设计并实现一个满足 LRU (最近最少使用) 缓存 约束的数据结构。  函数 get 和 put 必须以 O(1) 的平均时间复杂度运行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lc146 LRU缓存 双向链表+哈希表">
+<meta property="og:url" content="https://jh-ni.github.io/2022/05/25/lc146-LRU%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="Nini&#39;s Blog">
+<meta property="og:description" content="146.LRU缓存  请你设计并实现一个满足 LRU (最近最少使用) 缓存 约束的数据结构。  函数 get 和 put 必须以 O(1) 的平均时间复杂度运行。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jh-ni.github.io/images/image-5-1.png">
+<meta property="article:published_time" content="2022-05-25T11:20:16.000Z">
+<meta property="article:modified_time" content="2022-05-25T13:53:33.615Z">
+<meta property="article:author" content="Jh-Ni">
+<meta property="article:tag" content="study">
+<meta property="article:tag" content="哈希表">
+<meta property="article:tag" content="链表">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jh-ni.github.io/images/image-5-1.png">
+
+
+<link rel="canonical" href="https://jh-ni.github.io/2022/05/25/lc146-LRU%E7%BC%93%E5%AD%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jh-ni.github.io/2022/05/25/lc146-LRU%E7%BC%93%E5%AD%98/","path":"2022/05/25/lc146-LRU缓存/","title":"lc146 LRU缓存 双向链表+哈希表"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>lc146 LRU缓存 双向链表+哈希表 | Nini's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Nini's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Be brave, be humble.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">题解</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jh-Ni"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Jh-Ni</p>
+  <div class="site-description" itemprop="description">Be brave, be humble. </div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:jiahui_ni@foxmail.com" title="E-Mail → mailto:jiahui_ni@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jh-ni.github.io/2022/05/25/lc146-LRU%E7%BC%93%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jh-Ni">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nini's Blog">
+      <meta itemprop="description" content="Be brave, be humble. ">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="lc146 LRU缓存 双向链表+哈希表 | Nini's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          lc146 LRU缓存 双向链表+哈希表
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-05-25 19:20:16 / Modified: 21:53:33" itemprop="dateCreated datePublished" datetime="2022-05-25T19:20:16+08:00">2022-05-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><strong>146.LRU缓存</strong></p>
+<blockquote>
+<p>请你设计并实现一个满足 LRU (最近最少使用) 缓存 约束的数据结构。</p>
+</blockquote>
+<p>函数 <code>get</code> 和 <code>put</code> 必须以 <code>O(1)</code> 的平均时间复杂度运行。</p>
+<span id="more"></span>
+
+<p>实现 <code>LRUCache</code> 类：</p>
+<ul>
+<li><code>LRUCache(int capacity)</code> 以 <strong>正整数</strong> 作为容量 <code>capacity</code> 初始化 LRU 缓存</li>
+<li><code>int get(int key)</code> 如果关键字 <code>key</code> 存在于缓存中，则返回关键字的值，否则返回 <code>-1</code> 。</li>
+<li><code>void put(int key, int value)</code> 如果关键字 <code>key</code> 已经存在，则变更其数据值 <code>value</code> ；如果不存在，则向缓存中插入该组 <code>key-value</code> 。如果插入操作导致关键字数量超过 <code>capacity</code> ，则应该 <strong>逐出</strong> 最久未使用的关键字。</li>
+</ul>
+<blockquote>
+<p><strong>输入</strong> [“LRUCache”, “put”, “put”, “get”, “put”, “get”, “put”, “get”, “get”, “get”] [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]] </p>
+</blockquote>
+<blockquote>
+<p><strong>输出</strong> [null, null, null, 1, null, -1, null, -1, 3, 4]</p>
+</blockquote>
+<blockquote>
+<p><strong>解释</strong><br>LRUCache lRUCache &#x3D; new LRUCache(2);<br>lRUCache.put(1, 1); &#x2F;&#x2F; 缓存是 {1&#x3D;1}<br>lRUCache.put(2, 2); &#x2F;&#x2F; 缓存是 {1&#x3D;1, 2&#x3D;2}<br>lRUCache.get(1); &#x2F;&#x2F; 返回 1<br>lRUCache.put(3, 3); &#x2F;&#x2F; 该操作会使得关键字 2 作废，缓存是 {1&#x3D;1, 3&#x3D;3}<br>lRUCache.get(2); &#x2F;&#x2F; 返回 -1 (未找到)<br>lRUCache.put(4, 4); &#x2F;&#x2F; 该操作会使得关键字 1 作废，缓存是 {4&#x3D;4, 3&#x3D;3}<br>lRUCache.get(1); &#x2F;&#x2F; 返回 -1 (未找到)<br>lRUCache.get(3); &#x2F;&#x2F; 返回 3<br>lRUCache.get(4); &#x2F;&#x2F; 返回 4</p>
+</blockquote>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>LRU 缓存机制可以通过<strong>哈希表</strong>辅以<strong>双向链表</strong>实现。</p>
+<ul>
+<li><p>双向链表按照被使用的顺序存储了这些键值对，靠近头部的键值对是最久未使用的，而靠近头部的键值对是最近使用的。</p>
+</li>
+<li><p>哈希表即为普通的哈希映射（HashMap），通过缓存数据的键映射到其在双向链表中的位置。</p>
+</li>
+</ul>
+<p>这算是个设计题吧，跟平时的算法题不太一样，是需要自己搭个框架的，我觉得对我来说比较好理解的搭框架法是这样的。</p>
+<ol>
+<li>设计出双向链表的节点类</li>
+<li>构建双向链表及常用API</li>
+<li>结合哈希表和双向链表，实现函数作用</li>
+</ol>
+<p>关于**<code>get</code>和<code>put</code>**的函数设计思路，绘制成思维导图大致如下：</p>
+<p><img src="/images/image-5-1.png" alt="image-5-1"></p>
+<p>另外，在双向链表的实现中，使用一个<strong>伪头部</strong>（dummy head）和<strong>伪尾部</strong>（dummy tail）标记界限，这样在添加节点和删除节点的时候就不需要检查相邻的节点是否存在。（可以在构建双链表时先加入设定的<code>head</code>和<code>tail</code>，相当于正式开始的位置是<code>head.next</code>，结束的位置是<code>tail.prev</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//双链表的节点类Node</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> key;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> val;</span><br><span class="line">    <span class="keyword">public</span> Node prev;</span><br><span class="line">    <span class="keyword">public</span> Node next;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Node</span><span class="params">(<span class="type">int</span> k, <span class="type">int</span> v)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.key = k;</span><br><span class="line">        <span class="built_in">this</span>.val = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//构建双链表</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DoubleList</span>&#123;</span><br><span class="line">    <span class="comment">//头尾虚节点</span></span><br><span class="line">    <span class="keyword">private</span> Node head, tail;</span><br><span class="line">    <span class="comment">//初始化双链表</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DoubleList</span><span class="params">()</span>&#123;</span><br><span class="line">        head = <span class="keyword">new</span> <span class="title class_">Node</span>(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        tail = <span class="keyword">new</span> <span class="title class_">Node</span>(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        head.next = tail;</span><br><span class="line">        tail.prev = head;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//封装几个双链表中的API，选择这几个API是因为设计了把last当作最新，而first作为最旧（最近最少使用</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//在链表末尾加入Node</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addToLast</span><span class="params">(Node x)</span>&#123;</span><br><span class="line">        x.prev = tail.prev;</span><br><span class="line">        x.next = tail;</span><br><span class="line">        tail.prev.next = x;</span><br><span class="line">        tail.prev = x;</span><br><span class="line">        <span class="comment">//靠靠靠这个bug找了我好久好久！！一开始写的tail.next = x，还一直没发现</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//删除Node</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Node x)</span>&#123;</span><br><span class="line">        x.prev.next = x.next;</span><br><span class="line">        x.next.prev = x.prev;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回链表首位的key</span></span><br><span class="line">    <span class="keyword">public</span> Node <span class="title function_">firstNode</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">Node</span> <span class="variable">firstNode</span> <span class="operator">=</span> head.next;</span><br><span class="line">        <span class="keyword">return</span> firstNode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将哈希表和双向链表结合起来</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LRUCache</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> HashMap&lt;Integer, Node&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;Integer, Node&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="type">DoubleList</span> <span class="variable">cache</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DoubleList</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> capacity;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//LRUCache函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LRUCache</span><span class="params">(<span class="type">int</span> capacity)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.capacity = capacity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//get函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (map.containsKey(key)) &#123;</span><br><span class="line">            <span class="type">Node</span> <span class="variable">node</span> <span class="operator">=</span> map.get(key);</span><br><span class="line">            cache.delete(node);</span><br><span class="line">            cache.addToLast(node);</span><br><span class="line">            <span class="keyword">return</span> node.val;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//put函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(<span class="type">int</span> key, <span class="type">int</span> value)</span> &#123;</span><br><span class="line">        <span class="type">Node</span> <span class="variable">node</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Node</span>(key,value);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//当map里已经存在key值对应的node时</span></span><br><span class="line">        <span class="keyword">if</span> (map.containsKey(key)) &#123;</span><br><span class="line">            <span class="comment">//删掉原来的node</span></span><br><span class="line">            cache.delete(map.get(key));</span><br><span class="line">            map.remove(key);</span><br><span class="line">            <span class="comment">//加入新node并后置为最近使用</span></span><br><span class="line">            map.put(key,node);</span><br><span class="line">            cache.addToLast(node);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//当map里没有出现过时</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//如果链表长度已满，就先删掉第一个节点(LRU)</span></span><br><span class="line">            <span class="keyword">if</span> (map.size() == capacity) &#123;</span><br><span class="line">                <span class="type">Node</span> <span class="variable">x</span> <span class="operator">=</span> cache.firstNode();</span><br><span class="line">                cache.delete(x);</span><br><span class="line">                map.remove(x.key);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//把要加入的节点补到末尾</span></span><br><span class="line">            map.put(key, node);</span><br><span class="line">            cache.addToLast(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>写完这个在改好语法bug之后，有个逻辑bug一直找不出来，后来才发现是封装API就写错了，是双链表中的插入API，我写的是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addToLast</span><span class="params">(Node x)</span>&#123;</span><br><span class="line">        x.prev = tail.prev;</span><br><span class="line">        x.next = tail;</span><br><span class="line">        tail.prev.next = x;</span><br><span class="line">        tail.next = x;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际上应该是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addToLast</span><span class="params">(Node x)</span>&#123;</span><br><span class="line">        x.prev = tail.prev;</span><br><span class="line">        x.next = tail;</span><br><span class="line">        tail.prev.next = x;</span><br><span class="line">        tail.prev = x;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>就是把<code>tail.prev = x</code>写错成<code>tail.next = x</code>了，还是关于链表的基本功不熟练啦，这个竟然找了很久很久才发现，sigh🤦‍♀️找出来的时候感觉自己是个笨笨。</p>
+<p>下面是有关的两个问题。</p>
+<ol>
+<li><p><strong>为什么是双向链表 而单链表不行？</strong></p>
+<p>因为需要进行删除操作。删除一个节点不光要得到该节点本身的指针，也需要操作其前驱节点的指针，而双向链表才能支持直接查找前驱，保证操作的时间复杂度 O(1)。</p>
+</li>
+<li><p><strong>为什么在<code>Node</code>节点中同时要保存<code>key</code>和<code>value</code>？</strong></p>
+<p>因为当缓存容量满时，我们不仅仅要删除最后一个 <code>Node</code> 节点，还要把 <code>map</code> 中映射到该节点的 <code>key</code> 同时删除，而这个 <code>key</code> 只能由 <code>Node</code> 得到。如果 <code>Node</code> 结构中只存储 <code>val</code>，那么我们就无法得知 <code>key</code> 是什么，就无法删除 <code>map</code> 中的键。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/study/" rel="tag"># study</a>
+              <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag"># 哈希表</a>
+              <a href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag"># 链表</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/23/lc141-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8-%E5%8F%8C%E6%8C%87%E9%92%88/" rel="prev" title="lc141/142 环形链表 双指针">
+                  <i class="fa fa-chevron-left"></i> lc141/142 环形链表 双指针
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jh-Ni</span>
+</div>
+
+<!--
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"jh-ni","repo":"blogcomments","client_id":"d7d5b6890e085268245b","client_secret":"db4b1c0a2d29bf51e421342a85819915f4e41d43","admin_user":"jh-ni","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"7ae50e064d7aa4d91157d83b6d95cc49"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
